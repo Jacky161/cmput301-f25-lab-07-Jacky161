@@ -1,9 +1,13 @@
 package com.example.androiduitesting;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,5 +68,33 @@ public class MainActivity extends AppCompatActivity {
                 cityAdapter.clear();
             }
         });
+
+        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String cityName = (String) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getBaseContext(), ShowActivity.class);
+                intent.putExtra("cityName", cityName);
+
+                startActivity(intent);
+            }
+        });
     }
+
+    /*
+    Oops i dont actually need this lol
+     */
+
+//    @Override
+//    protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        outState.putSerializable("dataList", dataList);
+//        super.onSaveInstanceState(outState);
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+//        dataList = (ArrayList<String>) savedInstanceState.getSerializable("dataList");
+//        cityAdapter.notifyDataSetChanged();
+//        super.onRestoreInstanceState(savedInstanceState);
+//    }
 }
